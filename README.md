@@ -4,6 +4,13 @@
 
 https://react-hook-form.com/
 
+Why ? 
+
+- Compact Code
+- Isolates Component Re-renders
+- Input change subscriptions
+- Faster mounting
+
 ```javascript
 import React from "react";
 import { useForm } from "react-hook-form";
