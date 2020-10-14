@@ -2,7 +2,7 @@
 
 ## Forms 
 
-https://react-hook-form.com/
+[react-hook-form](https://react-hook-form.com/)
 
 Why ? 
 
@@ -46,3 +46,13 @@ const Example = () => {
   );
 };
 ```
+
+## Testing
+
+[react-testing](https://testing-library.com/docs/react-testing-library/intro)
+
+Why ? 
+
+- Test behavior of components instead of implementation
+- Easily test with nodes using `data-testid`
+- Encourages best practices
