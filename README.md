@@ -27,7 +27,7 @@ Why ?
 - Colocate related logic
 - Share reusable behaviors independent of component implementations
 
-## Testing 
+## Testing  🦢
 
 preferred lib: [react-testing](https://testing-library.com/docs/react-testing-library/intro)
 
