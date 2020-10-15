@@ -1,7 +1,15 @@
 # react-awesome
 
+React can be really confusing if you are just starting out and learning from different sources all at the same time. So I decided to build my own opiniated guide to react ! This guide will contain my favorite ways of doing things and the reasons why. 🎩
 
-## Testing
+## Separation between container and display containers 👣
+
+**Life is simpler when UI components are unaware of the network, business logic, or app state. Given the same props, always render the same data.**
+
+- **Container components**: components that are connected to the data store or local state and may have side-effects.
+- **Presentation components**: mostly pure components, which, given the same props and context, always return the same JSX.
+
+## Testing 
 
 [react-testing](https://testing-library.com/docs/react-testing-library/intro)
 
@@ -11,7 +19,14 @@ Why ?
 - Easily test with nodes using `data-testid`
 - Encourages best practices
 
-## State container
+## Component state for component state 👓
+
+Why ? 
+
+- Don't use redux if you don't need it
+- useState and useEffect hooks are often more then enough 
+
+## State container for Application wide state 🕶
 
 [react-redux](https://react-redux.js.org)
 
@@ -55,6 +70,51 @@ export const MyIncrementButton = React.memo(({ onIncrement }) => (
 ))
 ```
 
+## Component local side effects 🏄🏽
+
+[useEffect hook](https://reactjs.org/docs/hooks-effect.html)
+
+Why ? 
+
+- Remove duplicates between lifecycle methods (componentDidMount, componentDidUpdate, etc.)
+
+```javascript
+import React, { useState, useEffect } from 'react';
+
+function FriendStatus(props) {
+  const [isOnline, setIsOnline] = useState(null);
+
+  useEffect(() => {
+    function handleStatusChange(status) {
+      setIsOnline(status.isOnline);
+    }
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+    // Specify how to clean up after this effect:
+    return function cleanup() {
+      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+    };
+  });
+
+  if (isOnline === null) {
+    return 'Loading...';
+  }
+  return isOnline ? 'Online' : 'Offline';
+}
+```
+
+## Application wide side effects 🏋
+
+[redux-saga](https://redux-saga.js.org/)
+
+A redux middleware that uses generators to apply side effects after a redux action has been dispatched to the store. 
+
+Why ? 
+
+- Complex async side effects (fork, race, channels, etc.)
+- Compose parallel tasks
+- Easily test generators
+- **Have full power over how & when effects are executed**
+
 ## Hooks 
 
 [hooks](https://reactjs.org/docs/hooks-intro.html)
@@ -67,7 +127,7 @@ Why ?
 - Share reusable behaviors independent of component implementations
 
 
-## Forms 
+## Forms 📝 
 
 [react-hook-form](https://react-hook-form.com/)
 
@@ -114,9 +174,7 @@ const Example = () => {
 };
 ```
 
-
-
-## Routing
+## Routing ⚒
 
 [react-router](https://reactrouter.com/web/guides/quick-start)
 
@@ -149,3 +207,5 @@ class App extends Component {
   }
 }
 ```
+
+
