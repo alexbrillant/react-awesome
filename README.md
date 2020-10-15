@@ -13,6 +13,8 @@ Why ?
 
 ## State container
 
+[react-redux](https://react-redux.js.org)
+
 Why ? 
 
 - Deterministic state resolution (enabling deterministic view renders when combined with pure components)
