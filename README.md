@@ -11,7 +11,7 @@ Life is simpler when UI components are unaware of the network, business logic, o
 
 ## Testing 
 
-[react-testing](https://testing-library.com/docs/react-testing-library/intro)
+preferred lib: [react-testing](https://testing-library.com/docs/react-testing-library/intro)
 
 Why ? 
 
@@ -28,7 +28,7 @@ Why ?
 
 ## State container for Application wide state 🕶
 
-[react-redux](https://react-redux.js.org)
+preferred lib: [react-redux](https://react-redux.js.org)
 
 Why ? 
 
@@ -105,7 +105,7 @@ function FriendStatus(props) {
 
 ## Application wide side effects 🏋
 
-[redux-saga](https://redux-saga.js.org/)
+preferred lib: [redux-saga](https://redux-saga.js.org/)
 
 A redux middleware that uses generators to apply side effects after a redux action has been dispatched to the store. 
 
@@ -134,7 +134,7 @@ Why ?
 
 ## Forms 📝 
 
-[react-hook-form](https://react-hook-form.com/)
+preferred lib: [react-hook-form](https://react-hook-form.com/)
 
 Why ? 
 
@@ -181,7 +181,7 @@ const Example = () => {
 
 ## Routing ⚒
 
-[react-router](https://reactrouter.com/web/guides/quick-start)
+preferred lib: [react-router](https://reactrouter.com/web/guides/quick-start)
 
 Why ? 
 
