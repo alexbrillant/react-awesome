@@ -4,7 +4,7 @@ React can be really confusing if you are just starting out and learning from dif
 
 ## Separation between container and display containers 👣
 
-**Life is simpler when UI components are unaware of the network, business logic, or app state. Given the same props, always render the same data.**
+Life is simpler when UI components are unaware of the network, business logic, or app state. Given the same props, always render the same data.
 
 - **Container components**: components that are connected to the data store or local state and may have side-effects.
 - **Presentation components**: mostly pure components, which, given the same props and context, always return the same JSX.
