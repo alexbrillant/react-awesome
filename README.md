@@ -1,6 +1,6 @@
 # react-awesome
 
-React can be really confusing if you are just starting out and learning from different sources all at the same time. So I decided to build my own opiniated guide to react ! This guide will contain my favorite ways of doing things and the reasons why. 🎩
+React can be really confusing if you are just starting out and learning from different sources all at the same time. So I decided to build my own opiniated guide to react ! This guide will contain a mix of good/standard practices and also my favorite ways of doing things and the reasons why. 🎩
 
 ## Separation between container and display containers 👣
 
