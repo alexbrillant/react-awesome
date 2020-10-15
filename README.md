@@ -9,6 +9,24 @@ Life is simpler when UI components are unaware of the network, business logic, o
 - **Container components**: components that are connected to the data store or local state and may have side-effects.
 - **Presentation components**: mostly pure components, which, given the same props and context, always return the same JSX.
 
+## Component state for component state 👓
+
+Why ? 
+
+- Don't use redux if you don't need it
+- useState and useEffect hooks are often more then enough 
+
+## Hooks 
+
+[hooks](https://reactjs.org/docs/hooks-intro.html)
+
+Why ? 
+
+- Use state and hook in the components lifecycle
+- Replaces render prop pattern 
+- Colocate related logic
+- Share reusable behaviors independent of component implementations
+
 ## Testing 
 
 preferred lib: [react-testing](https://testing-library.com/docs/react-testing-library/intro)
@@ -19,12 +37,7 @@ Why ?
 - Easily test with nodes using `data-testid`
 - Encourages best practices
 
-## Component state for component state 👓
 
-Why ? 
-
-- Don't use redux if you don't need it
-- useState and useEffect hooks are often more then enough 
 
 ## State container for Application wide state 🕶
 
@@ -115,22 +128,6 @@ Why ?
 - Compose parallel tasks
 - Easily test generators
 - **Have full power over how & when effects are executed**
-
-### Testing
-
-TODO
-
-## Hooks 
-
-[hooks](https://reactjs.org/docs/hooks-intro.html)
-
-Why ? 
-
-- Use state and hook in the components lifecycle
-- Replaces render prop pattern 
-- Colocate related logic
-- Share reusable behaviors independent of component implementations
-
 
 ## Forms 📝 
 
