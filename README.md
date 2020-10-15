@@ -1,4 +1,4 @@
-# react-awesome
+# react-awesome 🐨
 
 React can be really confusing if you are just starting out and learning from different sources all at the same time. So I decided to build my own opiniated guide to react ! This guide will contain a mix of good/standard practices and also my favorite ways of doing things and the reasons why.
 
@@ -16,7 +16,7 @@ Why ?
 - Don't use redux if you don't need it
 - useState and useEffect hooks are often more then enough 
 
-## Hooks 
+## Hooks 🦥
 
 [hooks](https://reactjs.org/docs/hooks-intro.html)
 
