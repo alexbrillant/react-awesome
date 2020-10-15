@@ -45,6 +45,7 @@ Why ?
 Why ? 
 
 - Subscribe to the Redux store and dispatch actions, without having to wrap your components in connect()
+- Useful for using dispatch in deeply nested components 
 
 ```javascript
 import React, { useCallback } from 'react'
@@ -114,6 +115,10 @@ Why ?
 - Compose parallel tasks
 - Easily test generators
 - **Have full power over how & when effects are executed**
+
+### Testing
+
+TODO
 
 ## Hooks 
 
