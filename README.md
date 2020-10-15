@@ -16,7 +16,7 @@ Why ?
 - Don't use redux if you don't need it
 - useState and useEffect hooks are often more then enough 
 
-## Hooks 🦥
+## Hooks
 
 [hooks](https://reactjs.org/docs/hooks-intro.html)
 
