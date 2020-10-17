@@ -176,6 +176,80 @@ const Example = () => {
 };
 ```
 
+## Testing Forms
+
+### Form to test
+
+```javascript
+import React from "react";
+import { useForm } from "./src";
+
+import "./styles.css";
+
+export default function App() {
+  const { register, handleSubmit, watch, errors } = useForm();
+  const onSubmit = data => {
+    console.log(data);
+  };
+
+  const example = watch("example");
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <label>Example</label>
+      <input
+        name="example"
+        defaultValue="test"
+        ref={register}
+        data-testid="example"
+      />
+      <label>ExampleRequired</label>
+      <input
+        name="exampleRequired"
+        ref={register({ required: true, maxLength: 10 })}
+        data-testid="exampleRequired"
+      />
+      {errors.exampleRequired && <p>This field is required</p>}
+
+      {example === "test" && <i data-testid="message">Hidden message</i>}
+      <input type="submit" data-testid="submit" />
+    </form>
+  );
+}
+```
+
+### Tests
+
+```javascript
+import React from "react";
+import App from "./App";
+import { render, fireEvent } from "@testing-library/react";
+
+describe.only("App", () => {
+  test("should watch input correctly", () => {
+    const { getByTestId } = render(<App />);
+
+    fireEvent.input(getByTestId("example"), {
+      target: {
+        value: "test"
+      }
+    });
+
+    expect(getByTestId("message").innerHTML).toEqual("Hidden message");
+  });
+
+  test("should display correct error message", () => {
+    const { getByTestId, findByText } = render(<App />);
+
+    getByTestId("submit");
+
+    fireEvent.click(getByTestId("submit"));
+
+    findByText("This field is required");
+  });
+});
+```
+
 ## Routing ⚒
 
 preferred lib: [react-router](https://reactrouter.com/web/guides/quick-start)
