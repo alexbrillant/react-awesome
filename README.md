@@ -84,6 +84,129 @@ export const MyIncrementButton = React.memo(({ onIncrement }) => (
 ))
 ```
 
+## Computing Derived Data
+
+[reselect](https://github.com/reduxjs/reselect)
+
+Why ? 
+
+- Selectors can compute derived data, allowing Redux to store the minimal possible state.
+- Selectors are efficient. A selector is not recomputed unless one of its arguments changes.
+- Selectors are composable. They can be used as input to other selectors.
+
+```javascript
+import { createSelector } from 'reselect'
+
+const shopItemsSelector = state => state.shop.items
+const taxPercentSelector = state => state.shop.taxPercent
+
+const subtotalSelector = createSelector(
+  shopItemsSelector,
+  items => items.reduce((acc, item) => acc + item.value, 0)
+)
+
+const taxSelector = createSelector(
+  subtotalSelector,
+  taxPercentSelector,
+  (subtotal, taxPercent) => subtotal * (taxPercent / 100)
+)
+
+export const totalSelector = createSelector(
+  subtotalSelector,
+  taxSelector,
+  (subtotal, tax) => ({ total: subtotal + tax })
+)
+
+let exampleState = {
+  shop: {
+    taxPercent: 8,
+    items: [
+      { name: 'apple', value: 1.20 },
+      { name: 'orange', value: 0.95 },
+    ]
+  }
+}
+
+console.log(subtotalSelector(exampleState)) // 2.15
+console.log(taxSelector(exampleState))      // 0.172
+console.log(totalSelector(exampleState))    // { total: 2.322 }
+```
+
+
+## Composed Selectors
+
+### composedSelectors.js
+
+```javascript
+import { createSelector } from 'reselect'
+
+const getBar = (state) => state.foo.bar
+
+export const getBarState = createSelector(
+    [getBar],
+    (bar) => bar
+)
+
+export const firstSelector = (state) => state.a
+export const secondSelector = (state) => state.b
+export const thirdSelector = (state) => state.c
+
+export const myComposedSelector = createSelector(
+  firstSelector,
+  secondSelector,
+  thirdSelector,
+  (a, b, c) => a * b * c
+)
+```
+
+### __tests__/composedSelectors.js
+
+```javascript
+import { getBarState, firstSelector, secondSelector, thirdSelector, myComposedSelector } from "../composedSelectors";
+
+describe('selectors', () => {
+    it('should select bars state', () => {
+        expect(getBarState({ foo: { bar: [0] } })).toEqual([0])
+    })
+
+    it('should select a state', () => {
+        expect(firstSelector({ a: 1 })).toEqual(1)
+    })
+
+    it('should select b state', () => {
+        expect(secondSelector({ b: 1 })).toEqual(1)
+    })
+
+    it('should select c state', () => {
+        expect(thirdSelector({ c: 1 })).toEqual(1)
+    })
+
+    it('should calculate composed selector', () => {
+        expect(myComposedSelector.resultFunc(2,2,2)).toEqual(8)
+    })
+})
+```
+
+## Redux state normalization
+
+Nested data means that the corresponding reducer logic has to be more nested or more complex. In particular, trying to update a deeply nested field can become very ugly very fast.
+
+Since immutable data updates require all ancestors in the state tree to be copied and updated as well, and new object references will cause connected UI components to re-render, an update to a deeply nested data object could force totally unrelated UI components to re-render even if the data they're displaying hasn't actually changed.
+
+[Normalizing state shape redux documentation](https://redux.js.org/recipes/structuring-reducers/normalizing-state-shape)
+
+```javascript
+import { combineReducers } from "redux"
+
+
+const rootReducer = combineReducers({
+  users: sectionReducer("USER")(users),
+  articles: sectionReducer("ARTICLE")(articles)
+})
+```
+
+
+
 ## Component local side effects 🏄🏽
 
 [useEffect hook](https://reactjs.org/docs/hooks-effect.html)
